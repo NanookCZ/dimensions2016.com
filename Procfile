@@ -1,0 +1,1 @@
+web: gunicorn edventure.wsgi --log-file -

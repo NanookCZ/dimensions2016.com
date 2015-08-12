@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load gravatar %}
+{% load staticfiles %}
+{% block title%}{{user1.username}}{% endblock title %}
+{% block css %}
+	<style>
+	.container.main-content {
+			min-height: 300px;
+		}
+		.user-wrapper, .content-type {
+			display: none;
+		}
+		.username, .user-name {
+			font-weight: bold;
+		
+		}
+		.user-contact {
+			margin-left: 15px;
+		}
+		.user-c-heading {
+			margin-top: 5px;
+			padding-bottom: 25px;
+		}
+		.main-image {
+	background: url('https://trello-attachments.s3.amazonaws.com/5585ac604e4d95cb6a64c0a7/1263x250/b83ac9cea29d4685a83990f187dd3f8e/banner4.png') no-repeat center center;
+  	height: 245px;
+  	position: relative;
+  	margin-top: -20px;
+}	
+		.left-news {
+			display: none;
+		}
+
+		.categories {
+			padding-top: 20px;
+		}
+
+		.single-user {
+			padding-top: 25px;
+		}
+
+		.edit-profile {
+			color: #333;
+			text-decoration: underline;
+		}
+
+		.section-heading {
+			
+			font-weight: bold;
+		}
+
+		.below {
+			margin-left: -15px;
+		}
+
+		.categories {
+			display: none;
+		}
+		.single-user {
+			min-height: 300px;
+		}
+
+		.content-box {
+			height: auto;
+			padding: 0;
+		}
+
+		img.event-user.text-center {
+			  height: 78px;
+  position: absolute;
+  top: 91px;
+  border-radius: 50%;
+  left: 33%;
+		}
+
+		.user-box {
+			padding-top: 25px;
+			margin-left: 15px;
+		}
+
+		.sidebar {
+			margin-top: 0;
+		}
+
+		{% if request.user.is_authenticated %}
+		ul.nav.navbar-nav.pull-right {
+			margin-top: -47px;
+		}
+		{% endif %}
+	</style>
+{% endblock css %}
+{% block content %}
+	<div class="container single-user">	
+		<div class="row">
+			{% if request.user.is_authenticated %}
+			<style>
+				ul.nav.navbar-nav.pull-right {
+								margin-top: 0;
+							}
+			</style>
+			<div class="col-lg-2">
+				<img src="{% gravatar_url user1.email 100 %}">
+
+			</div>
+
+			<div class="col-lg-8">
+			
+			<a href="{% url 'user_detail' %}" class="edit-profile text-right"><img src="">Edit profile</a>
+				<p class="username">{{ user1.username}}</p>
+				<p class="user-name">{{ user1.first_name}}  {{user1.last_name}}</p><br />
+				<p class="user-desc">{{user1.userprofile.description}}</p><br />
+				<div class="col-lg-6 below">
+				
+				<p class="user-desc">{{user1.userprofile.city}}</p>
+				<p class="user-desc">{{user1.userprofile.state}}</p><br />
+				</div>
+				<div class="col-lg-6">
+				{% if user1.userprofile.personal_website == None %}<p><a href="{{user1.userprofile.personal_website}}" target="new">User personal web</a></p>{% endif %}
+				<p class="user-desc">{{user1.userprofile.github_username}}</p>
+				<p class="user-desc">{{user1.userprofile.phone_number}}</p>
+				
+				</div>
+				
+			</div>
+
+		</div>
+		{% else %}
+			<style>
+				
+
+			.single-user {
+				min-height: 420px;
+			}
+			</style>
+			<div class="col-lg-3">
+			<div class="content-box">
+				<img src="{% static 'images/user_banner.png' %}">
+						
+					<img class="event-user text-center" src="{% gravatar_url user1.email 55 %}">
+					<div class="user-box">
+					<h3 class="user-title">{{user1.username|upper}}</h3>
+					
+					<div class="dates">
+					<p class="date">{{user1.first_name}} {{user1.last_name}}</p><br />
+					<p class="city">{% if user1.userprofile.city != None %} {{user1.userprofile.city}} {% else %}Unknown city{% endif %}</p>
+					<p class="user-web"><a href="mailto:{{user1.email }}">Contact {{user1.first_name}}</p>
+					
+					</div>
+				</div>
+			</div>
+			</div>
+		{% endif %}
+			</div>
+			
+		</div>
+
+	</div>
+
+
+
+{% endblock content %}

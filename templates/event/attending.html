@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load gravatar %}
+{% load endless %}
+{% block title %}Events{% endblock title %}
+{% block css %}
+	<style>
+	
+		.main-image {
+	background: url('https://trello-attachments.s3.amazonaws.com/5585ac604e4d95cb6a64c0a7/1263x250/07766f9db2f1a615eea17409ea5346d5/banner5.png') no-repeat center center;
+  	height: 245px;
+  	position: relative;
+  	margin-top: -20px;
+}		
+		.content-box {
+			position: relative;
+			padding: 0px;
+		}
+
+		.event-title {
+			margin-left: 15px;
+			color: #333;
+		}
+
+		.event-title:hover {
+			color: #b96769;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: none;
+		}
+
+		img.event-user.pull-right {
+			  top: 108px;
+  right: 25px;
+  position: absolute;
+  border-radius: 50%;
+		}
+
+		.date {
+			margin-right: 15px;
+		}
+
+		.city {
+			margin-left: 15px;
+		}
+
+		.event-description {
+			margin-top: 5px;
+			margin-left: 15px;
+			padding: 15px 15px;
+			background: #b96769;
+			color: #fff;
+		}
+
+		.categories {
+			display: none;
+		}
+
+		.content-type-item {
+			display: none;
+		}
+		.current-events {
+			margin-top: -22px;
+			padding-bottom: 25px;
+		}
+
+
+		 
+
+		 {% if request.user.is_authenticated %}
+		 .current-events {
+			margin-top: 35px;
+			padding-bottom: 25px;
+		}
+   
+
+    .sidebar {
+    	margin-top: 0px;
+    }
+    {% endif %}	
+		</style>
+
+		{% endblock css %}
+
+{% block news %}
+<div class="left-news">
+		<h3 class="banner-heading text-center">Event of the month</h3>
+			<p class="course-name">{{ month_event.title }}</p>
+		
+        	
+        		<a href="{% url 'event-detail' slug=month_event.slug %}">
+          			<button class="course-login">Join event</button>
+          		</a>
+         	
+      </div>
+{% endblock news %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-9 current-events">
+		Number of attending events is {{ events.count }}.
+		</div>
+		{% for event in events %}
+			
+			{% if not request.user.is_authenticated %}
+			<div class="col-lg-6 content-bigger">
+			{% else %}
+			<style>
+				.content-bigger {
+					padding-top: 25px;
+				}
+			</style>
+			<div class="col-lg-5 content-bigger">
+			{% endif %}
+				<div class="content-box">
+					{% if request.user.is_authenticated %}
+						{% if event.event.category.title == 'Creativity' %}
+						<img src="{% static 'images/event_banner1.png' %}">
+						{% elif event.event.category.title == 'Webtech' %}
+						<img src="{% static 'images/event_banner2.png' %}">
+						{% elif event.event.category.title == 'Enterpreneurship' %}
+						<img src="{% static 'images/event_banner3.png' %}">
+						{% elif event.event.category.title == 'Information literacy' %}
+						<img src="{% static 'images/event_banner4.png' %}">
+						{% elif event.event.category.title == 'Personal development' %}
+						<img src="{% static 'images/event_banner5.png' %}">
+						{% endif %}
+					{% else %}
+						{% if event.event.category.title == 'Creativity' %}
+						<img src="{% static 'images/event_banner_big1.png' %}">
+						{% elif event.event.category.title == 'Webtech' %}
+						<img src="{% static 'images/event_banner_big2.png' %}">
+						{% elif event.event.category.title == 'Enterpreneurship' %}
+						<img src="{% static 'images/event_banner_big3.png' %}">
+						{% elif event.event.category.title == 'Information literacy' %}
+						<img src="{% static 'images/event_banner_big4.png' %}">
+						{% elif event.event.category.title == 'Personal development' %}
+						<img src="{% static 'images/event_banner_big5.png' %}">
+						{% endif %}
+					{% endif %}
+
+					<a href="{% url 'event-detail' slug=event.event.slug %}"><h3 class="event-title">{{event.event.title}}</h3></a>
+					<img class="event-user pull-right" src="{% gravatar_url event.event.hosted_by.email 55 %}">
+					<div class="dates">
+					<p class="date pull-right">{% if event.event.event_start != None %}{{event.event.event_start}}{% else %}Unknown event start{% endif %}</p>
+					<p class="city">{{event.event.city}}</p>
+					<p class="event-description">{{event.event.description|truncatechars:100}}</p>
+				</div>
+			</div>
+
+			</div>
+		{% endfor %}
+	</div>
+{% endblock content %}

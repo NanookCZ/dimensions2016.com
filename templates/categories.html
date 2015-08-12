@@ -1,0 +1,11 @@
+<!-- CATEGORIES -->
+<li class="category-items featured">
+	<a href="{% url 'homepage' %}">Featured</a>
+</li>
+{% for category in categories %}
+	<li class="category-items">
+		<a href="{% url 'category' slug_cat=category.slug %}">{{category.title}}</a>
+	</li>
+{% endfor %}
+<!-- END CATEGORIES -->
+

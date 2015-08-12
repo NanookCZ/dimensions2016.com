@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load easy_maps_tags %}
+{% load gravatar %}
+{% block title %}{{event.title}}{% endblock title %}
+{% block form %}
+<script type="text/javascript" src="https://addthisevent.com/libs/1.6.0/ate.min.js"></script>
+{% endblock form %}
+{% block css %}
+<style>
+
+
+  .main-image {
+    display: none;
+  }
+
+  .categories {
+    display: none;
+  }
+
+  .content-type-item {
+    display: none;
+  }
+
+  .breadcrumb {
+    background: #fff;
+    padding: 0 0;
+    margin-top: -40px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #d4d1d1;
+  }
+
+  a.b-desc-b,
+  a.b-desc-c {
+    color: #333;
+    text-decoration: underline;
+  }
+
+  .box {
+    margin-top: 25px;
+
+  }
+
+  a.b-desc-d {
+    color: #b96769;
+  }
+
+  h6 {
+    font-size: 20px;
+  }
+
+  div#atedrop1 {
+    float: right;
+    margin-top: -55px;
+    z-index: 50;
+  }
+
+  .event-wrapper {
+    margin-bottom: 61px;
+  }
+
+  h6.contact-event {
+    margin-top: 26px;
+  }
+
+  a {
+    color: #333;
+  }
+
+  p.organiser-name {
+    padding-top: 13px;
+    font-weight: bold;
+  }
+
+  img.event-user {
+    border-radius: 50%;
+    float: left;
+  }
+
+  a.open-model.join-btn {
+      color: #fff;
+    padding: 15px 40px;
+    background: #b96769;
+  }
+
+  ul.errorlist {
+    
+  }
+  {% if request.user.is_authenticated %}
+     .current-events {
+      margin-top: 35px;
+      padding-bottom: 25px;
+    }
+   
+   .sidebar {
+    margin-top: -20px;
+   }
+
+   .sidebar {
+    min-height: 900px;
+   }
+   .breadcrumb {
+    margin-top: 0px;
+   }
+
+
+    {% endif %} 
+</style>
+{% endblock css %}
+{% block content %}
+<div class="row">
+  {% if request.user.is_authenticated %}
+    <div class="col-lg-10">
+  {% else %}
+    <div class="col-lg-12">
+  {% endif %}
+      <div class="breadcrumb">
+        <div class="row">
+          <div class="col-lg-9">
+            <p class="b-desc">You are here: 
+              <a class="b-desc-b" href="{% url 'homepage' %}">Edventure</a> 
+                <img src="{% static 'images/breadcrumb-icon.png' %}"> 
+              <a class="b-desc-c" href="{% url 'category-event' slug_cat=event.category.slug %}">{{event.category.title}}</a> 
+                <img src="{% static 'images/breadcrumb-icon.png' %}">
+              <a class="b-desc-d">{{event.title}}
+              </a>
+            </p>
+          </div>
+     
+          <div class="col-lg-3 pull-right">
+            <a class="open-model join-btn" data-toggle="modal" data-target="#myModal1">Join Event</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 event-wrapper">
+        <h2 class="event-title">{{ event.title }}</h2>
+        {% if event.hosted_by == request.user and request.user.is_authenticated %}
+          <a href="{% url 'edit-event' id=event.id %}">Edit event</a>
+        {% endif %}
+        <p class="event-description">{{ event.description }}</p>
+        <hr class="event-divider">
+        
+        <h6 class="contact-event">Event date & time</h6>
+        <p class="event-date">{{ event.event_start }}, {{ event.time_of_event }} - {{ event.event_end }}</p>
+        <div title="Add to Calendar" class="addthisevent">Add to Calendar
+          <span class="start">{{ event.event_start|date:"M d, Y" }} {{event.time_of_event}}</span>
+          <span class="end">{{ event.event_end|date:"M d, Y" }} {{event.time_of_event}}</span>
+          <span class="timezone">Europe/Prague</span>
+          <span class="title">{{event.title}}</span>
+          <span class="description">{{event.description}}</span>
+          <span class="location">{{event.city}}</span>
+          <span class="date_format">MM/DD/YYYY</span>
+        </div>
+        
+        <hr class="event-divider">
+        <h6 class="contact-event">Address information</h6>
+        <p class="event-date">{{ event.city}}, {{ event.state}}</p>
+        <p class="event-date">{{ event.street_address }}, {{ event.zip_code}}</p>
+        {% easy_map event.get_event_address 500 250 15 %}
+      </div>
+      
+      <div class="col-lg-4">
+        <h6 class="contact-event">Organiser information</h6>
+        <p class="organiser-name">{{event.hosted_by.first_name}}  {{event.hosted_by.last_name}}</p>
+        <p class="organiser-email">
+          <img src="{% static 'images/phone.png' %}"> {{event.telephone}}, 
+            <img src="{% static 'images/email_icon.png' %}"> <a href="{{event.hosted_by.email}}">Contact organiser</a>
+        </p>
+
+        <hr class="event-divider">
+        <div class="guests col-lg-12">
+          <h6>Participants - Attending</h6>
+            {% for guest in guests %}
+                <ul class="list-inline">
+                {% if guest.attending_status == 'yes' %}
+                  
+                  
+                    <li class="list-inline" style="float: left;"><a href="{% url 'single-user' id=guest.user.id %}"><img class="event-user" src="{% gravatar_url guest.user.email 55 %}"></a></li>
+                 
+                {% endif %}
+                </ul>
+            {% endfor %}
+          </div>
+
+          <hr class="event-divider">
+          
+          <div class="guests col-lg-12">
+          <h6>Participants - Maybe</h6>
+            {% for guest in guests %}
+              <div class="col-lg-12">
+                {% if guest.attending_status == 'maybe' %}
+                  
+                  <a href="{% url 'single-user' id=guest.user.id %}"><img class="event-user" src="{% gravatar_url guest.user.email 55 %}"></a>
+                {% else %}
+                0 maybe participants
+                    
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+          </div>
+          
+
+          {% for u in guests %}
+            {% if request.user == u.user %}
+              <style>
+                .join-btn {
+                  display: none;
+                }
+              </style>
+            {% endif %}
+          {% endfor %}
+
+          
+            <div id="myModal1" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span class="close">Close</span>&times;</button>
+                    <h4 class="modal-title">Join {{ event.title }}</h4>
+                  </div>
+                  
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-lg-5">
+                        <p class="event-modal">Do you attend this event?</p>
+                        <form action='' method='POST'>{% csrf_token %}
+                          {{ form.as_p }}
+                          <input type='submit' value = 'Join' class="btn-reccommend">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock content %}

@@ -1,0 +1,239 @@
+{% extends "account/base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load account %}
+{% block title %}Log in{% endblock title %}
+{% block css %}
+  <style>
+    .categories {
+      display: none;
+    }
+
+    .main-image {
+      background: url('https://trello-attachments.s3.amazonaws.com/5585ac604e4d95cb6a64c0a7/1600x317/3717c36e09f3d788398c2f53bd244c6a/banner3.png') no-repeat center center;
+      height: 245px;
+      position: relative;
+    
+    }
+
+    .left-news {
+      display: none;
+    }
+
+    .content-type {
+      display: none;
+    }
+
+    .main-content {
+      margin-top: -35px;
+      padding-bottom: 75px;
+    }
+
+    .footer {
+      bottom: 0;
+      margin-bottom: 0px;
+    }
+
+    .login-heading {
+      padding-top: 55px;
+      padding-bottom: 25px;
+    }
+
+    a.socialaccount_provider.facebook {
+      background: #556b88;
+      padding: 15px 65px;
+      border-radius: 5%;
+      color: #fff;
+      margin-left: -25px;
+      margin-right: 15px;
+    }
+
+    a.socialaccount_provider.facebook:hover {
+      text-decoration: none;
+    }
+
+    .login-or {
+      margin-right: 15px;
+    }
+
+    label {
+      display: none;
+    }
+
+    label:nth-child(6) {
+      display: inline;
+      margin-left: 20px;
+    }
+
+    #id_login,
+    #id_password {
+      padding: 10px 25px;
+    }
+
+    #id_password {
+      margin-left: 15px;
+    }
+
+    #id_remember {
+
+      margin-left: 5px;
+    }
+
+    .btn-login {
+      margin-left: 15px;
+      padding: 10px 65px;
+      background: #fff;
+      border: 1px solid #cccccc;
+      color: #666;
+    }
+
+    .btn-login:hover {
+      background: #fff;
+      border: 1px solid #cccccc;
+      color: #666;
+    }
+
+    .fb-desc {
+      margin-top: 15px;
+      margin-left: -15px;
+    }
+
+    .forgot-pass {
+      position: absolute;
+      text-align: right;
+      right: 510px;
+      margin-top: -25px;
+      color: #333;
+      text-decoration: underline;
+    }
+
+    
+
+    .categories {
+      display: none;
+    }
+
+   
+
+    .content-type {
+      display: none;
+    }
+
+    .main-content {
+      margin-top: -35px;
+      padding-bottom: 75px;
+    }
+
+    .signup-orange {
+      color: #fe6f17;
+    }
+
+    .signup-heading {
+      padding-bottom: 25px;
+      padding-top: 10px;
+    }
+
+    .feature-paragraph {
+      font-weight: bold;
+      color: #333;
+      padding-bottom: 30px;
+    }
+
+    a.socialaccount_provider.facebook {
+      background: #556b88;
+      padding: 15px 65px;
+      border-radius: 5%;
+      color: #fff;
+      margin-left: -25px;
+      margin-right: 15px;
+    }
+
+    a.socialaccount_provider.facebook:hover {
+      text-decoration: none;
+    }
+
+    .login-or {
+      margin-right: 15px;
+    }
+
+    label {
+      display: none;
+    }
+
+    #id_username,
+    #id_email,
+    #id_password1,
+    #id_password2 {
+      padding: 10px 40px;
+      margin-bottom: 10px;
+    }
+
+    #id_email,
+    #id_password2 {
+      margin-left: 15px;
+    }
+
+    #password1,
+    #password2 {
+      margin-top: 10px;
+    }
+
+    .signup-form {
+      margin-top: -15px;
+    }
+
+    .btn-signup {
+      margin-right: 70px;
+      text-align: right;
+      background: #fe6f17;
+      border: 1px solid #fe6f17;
+      color: #fff;
+      padding: 5px 20px;
+    }
+
+    .btn-signup:hover {
+      background: #fe6f17;
+      border: 1px solid #fe6f17;
+      color: #fff;
+    }
+
+    .hovno {
+      padding-top: 155px;
+    }
+  </style>
+{% endblock css %}
+{% block content %}
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <h2 class="login-heading">Welcome back, you can login here:</h2>
+  <div class="login-wrapper col-lg-12">
+    {% if socialaccount.providers %}
+      <div class="socialaccount_ballot">
+        <ul class="socialaccount_providers list-inline">
+          <li class="btn-facebook">{% include "socialaccount/snippets/provider_list.html" with process="login" %}</li>
+          <li class="login-or">or</li>
+          <li>
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+              {% csrf_token %}
+                {{ form }}
+                  {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                  {% endif %}
+                  <div class="form-actions" style="float: right;">
+                    <button class="btn btn-primary btn-login" type="submit">Login</button>
+                  </div>
+              </form>
+            </li>
+        </ul>
+      </div>
+      {% include "socialaccount/snippets/login_extra.html" %}
+    {% endif %}
+    <ul class="second-block list-inline">
+      <li class="fb-desc">We wont post on your wall.</li>
+      <li><a class="btn forgot-pass" href="{% url 'account_reset_password' %}">I forgot my password</a></li>
+    </ul>
+  </div>
+
+  
+  </div>
+
+{% endblock %}

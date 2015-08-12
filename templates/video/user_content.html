@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}My content{% endblock title %}
+{% block css %}
+<style>
+
+.container.main-content {
+      min-height: 300px;
+    }
+  .content-bigger {
+    padding-top: 45px;
+  }
+  {% if request.user.is_authenticated %}
+    ul.nav.navbar-nav.pull-right {
+      margin-top: -47px;
+    }
+    {% endif %}
+</style>
+{% endblock css %}
+{% block news %}
+<div class="left-news">
+    <h3 class="banner-heading text-center">Course of the month</h3>
+      <p class="course-name">{{ month_course.title }}</p>
+      {% if not request.user.is_authenticated %}
+              <a href="http://127.0.0.1:8000/accounts/signup">
+                <button class="course-login">Begin learning</button>
+              </a>
+          {% else %}
+            <a href="{% url 'content-detail' slug_con=month_course.slug %}">
+                <button class="course-login">Start course</button>
+              </a>
+          {% endif %}
+      </div>
+{% endblock news %}
+{% block content %}
+  {% if request.path == '/favourite/' %}
+    <div class="done">
+      {% for item in user_content %}
+
+        {% if item.content_state == 'Favourite' %}
+          <div class="col-lg-5 content-bigger">
+            <div class="content-box">
+              <a href="{% url 'content-detail' slug_con=item.content.slug %}">
+                <h3 class="content-title">{{item.content.title}}</h3>
+              </a>
+              <img class="content-image-icon pull-right" src="http://127.0.0.1:8000/media/{{item.content.content_type.image}}"/>
+              {% if item.content.embed_code %}
+                <div class="content-video">{{item.content.embed_code|safe}}</div>
+              {% else %}
+                <img class="content-image text-center" src="http://127.0.0.1:8000/media/{{item.content.image}}"/>
+              {% endif %}
+              <p class="content-description">{{item.content.description|truncatechars:155}}</p>
+            </div>
+          </div>
+        {% endif %}
+        {% empty %}
+        <p>You dont have any content in this list.</p>
+      {% endfor %}
+    </div>
+  {% elif request.path == '/learned/' %}
+
+    <div class="todo">
+      {% for item in user_content %}
+
+        {% if item.content_state == 'Learned' %}
+          <div class="col-lg-5 content-bigger">
+            <div class="content-box">
+              <a href="{% url 'content-detail' slug_con=item.content.slug %}">
+                <h3 class="content-title">{{item.content.title}}</h3>
+              </a>
+              <img class="content-image-icon pull-right" src="http://127.0.0.1:8000/media/{{item.content.content_type.image}}"/>
+              {% if item.content.embed_code %}
+                <div class="content-video">{{item.content.embed_code|safe}}</div>
+              {% else %}
+                <img class="content-image text-center" src="http://127.0.0.1:8000/media/{{item.content.image}}"/>
+              {% endif %}
+              <p class="content-description">{{item.content.description|truncatechars:155}}</p>
+            </div>
+          </div>
+        {% endif %}
+        {% empty %}
+        <p>You dont have any content in this list.</p>
+      {% endfor %}
+    </div>
+  {% elif request.path == '/later/' %}
+
+    <div class="todo">
+      {% for item in user_content %}
+
+        {% if item.content_state == 'Later' %}
+          <div class="col-lg-5 content-bigger">
+            <div class="content-box">
+              <a href="{% url 'content-detail' slug_con=item.content.slug %}">
+                <h3 class="content-title">{{item.content.title}}</h3>
+              </a>
+              <img class="content-image-icon pull-right" src="http://127.0.0.1:8000/media/{{item.content.content_type.image}}"/>
+              {% if item.content.embed_code %}
+                <div class="content-video">{{item.content.embed_code|safe}}</div>
+              {% else %}
+                <img class="content-image text-center" src="http://127.0.0.1:8000/media/{{item.content.image}}"/>
+              {% endif %}
+              <p class="content-description">{{item.content.description|truncatechars:155}}</p>
+            </div>
+          </div>
+        {% endif %}
+        {% empty %}
+        <p>You dont have any content in this list.</p>
+      {% endfor %}
+    </div>
+{% else %}
+test
+{% endif %}
+{% endblock content %}

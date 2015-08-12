@@ -48,6 +48,9 @@ INSTALLED_APPS = (
     'easy_maps',
     'bootstrap3_datetime',
     'cloudinary',
+    'accounts',
+    'events',
+    'videos',
 )
 
 

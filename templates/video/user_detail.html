@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}{{user.username}}{% endblock title %}
+{% block css %}
+	<style>
+	.container.main-content {
+			min-height: 300px;
+		}
+		.user-wrapper,
+		.content-type-item,
+		.content-type {
+			display: none;
+		}
+
+		.profile-heading {
+			margin-top: -15px;
+			padding-bottom: 15px;
+		}
+
+		input {
+			width: 100%;
+		}
+
+		textarea {
+			width: 100%;
+		}
+
+		.btn-cancel {
+			float: left;
+			width: 200px;
+			margin-top: 17px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			background: #fff;
+			border: 1px solid #ccc;
+			color: #333;
+
+		}
+
+		.btn-update {
+			float: right;
+			width: 200px;
+			margin-top: 15px;
+			margin-bottom: 45px;
+			background: #b96769;
+			color: #fff;
+			border: none;
+			padding-top: 11px;
+			padding-bottom: 11px;
+		}
+
+		.main-image {
+	background: url('https://trello-attachments.s3.amazonaws.com/5585ac604e4d95cb6a64c0a7/1263x250/b83ac9cea29d4685a83990f187dd3f8e/banner4.png') no-repeat center center;
+  	height: 245px;
+  	position: relative;
+  	margin-top: -20px;
+}	
+	.left-news {
+		display: none;
+	}
+
+	.user-update {
+		padding-top: 25px;
+	}
+	{% if request.user.is_authenticated %}
+		.navbar-default.sidebar.col-lg-2 {
+			height: 1000px;
+    min-height: 1000px;
+		}
+
+		{% endif %}
+	</style>
+{% endblock css %}
+{% block content %}
+	<div class="container user-update">
+		<div class="row">
+			<div class="col-lg-8">
+				<h3 class="profile-heading">Update your profile</h3>
+				<form method='POST' action=''>{% csrf_token %}
+					{{basic_form.as_p}}
+					{{profile_form.as_p}}
+					<input type="submit" value = 'Update' class="btn-update">
+				</form>
+				<a href="{% url 'single-user' id=request.user.id %}"><button class="btn btn-cancel">Back to profile</button></a>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

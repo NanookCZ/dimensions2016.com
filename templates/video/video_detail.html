@@ -1,0 +1,342 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load disqus_tags %}
+{% block title %}{{content.title}}{% endblock title %}
+{% block css %}
+	<style>
+	.content-type {
+		display: none;
+	}
+	.breadcrumb {
+		padding-bottom: 15px;
+		padding-top: 34px;
+		border-bottom: 1px solid #cccccc;
+	background: none;
+	}
+
+	{% if request.user.is_authenticated %}
+	.breadcrumb {
+		padding-bottom: 15px;
+		padding-top: 17px;
+		border-bottom: 1px solid #cccccc;
+	background: none;
+	}
+	{% endif %}
+
+	.b-desc-b {
+		color: #333;
+		margin-left: 10px;
+		
+	}
+
+	.b-desc-b:hover {
+		color: #333;
+		text-decoration: none;
+	}
+
+	.b-desc-c {
+		color: #333;
+		
+		margin-left: 10px;
+	}
+
+	.b-desc-c:hover {
+		color: #333;
+		text-decoration: none;
+	}
+
+	.b-desc-d {
+		text-decoration: underline;
+		color: #b96769;
+	}
+
+	.b-desc-d:hover {
+		text-decoration: underline;
+		color: #b96769;
+	}
+
+	.content-wrapper {
+
+		position: relative;
+	}
+	.left-content {
+		background: #fff;
+		margin-bottom: 35px;
+	}
+
+	.content-heading {
+		font-size: 22px;
+		color: #333;
+		margin-top: 17px;
+	}
+	.content-icon {
+		float: right;
+		margin-top: -35px;
+	}
+	.video {
+		margin-top: 26px;
+	}
+
+	.source {
+		margin-top: 25px;
+		margin-bottom: 25px;
+		padding-bottom: 30px;
+		border-bottom: 1px solid #ccc;
+	}
+
+	.btn-source {
+		margin-left: 10px;
+		background: #fff;
+		border: 1px solid #cccccc;
+		color: #333;
+		padding: 5px 15px;
+	}
+
+	.btn-source a {
+		color: #333;
+	}
+
+	.btn-source a:hover {
+		text-decoration: none;
+	}
+
+	.share {
+		padding-bottom: 25px;
+		border-bottom: 1px solid #ccc;
+	}
+	.fb-share,
+	.tw-share {
+		margin-left: 15px;
+	}
+
+	.share-link {
+		background: #fff;
+		border: 1px solid #ccc;
+		padding: 10px 10px;
+		border-radius: 5%;
+	}
+
+	.buttons {
+		margin-top: 20px;
+		padding-bottom: 25px;
+		border-bottom: 1px solid #ccc;
+	}
+
+	.done-btn,
+	.todo-btn,
+	.later-btn {
+		background: #fff;
+		padding: 12px 53px;
+		border: 1px solid #ccc;
+		color: #333;
+		border-radius: 2%;
+		margin-left: 20px;
+
+	}
+	.todo-icon {
+  position: absolute;
+  left: 55px;
+  top: 18px;
+}
+
+	.done-icon {
+  position: absolute;
+  left: 244px;
+  top: 18px;
+}
+
+	.later-icon {
+  position: absolute;
+  left: 425px;
+  top: 18px;
+}
+	.reccommend {
+		margin-top: 25px;
+	}
+
+	.author-name {
+		color: #fe6f17;
+		font-weight: bold;
+	}
+
+	.description {
+		padding-bottom: 25px;
+	}
+	.related-content {
+		padding-top: 15px;
+		margin-left: -15px;
+		border-top: 1px solid #ccc;
+	}
+
+	.related-box {
+		float: left;
+	}
+
+	.related-box1 {
+		margin-left: 20px;
+		float: left;
+		padding-bottom: 20px;
+	}
+
+	.related-heading {
+		color: #333;
+		font-weight: bold;
+	}
+	.r-icon {
+		text-align: right;
+		float: right;
+		margin-top: -29px;
+	}
+
+	.related-desc {
+		width: 350px;
+	}
+
+	.left-content {
+		position: relative;
+	}
+	.content-image {
+		display: block;
+		position: relative;
+		margin: 0;
+		top: 0;
+		left: 25%;
+		right: 0;
+		bottom: 0;
+		height: 200px;
+	}
+
+	.default-image,
+	.related-header,
+	.related-desc {
+		float: left;
+	}
+
+	.default-image {
+		margin-right: 15px;
+	}
+
+		.main-image {
+			display: none;
+		}
+
+	.categories {
+		margin-top: -20px;
+	}
+
+	.share {
+		margin-top: 25px;
+	}
+
+	.added {
+		margin-top: 15px;
+	}
+
+	.content-author a {
+		font-weight: bold;
+		color: #333;
+	}
+
+	.source-link {
+		padding-bottom: 15px;
+	}
+	.source-link a {
+		padding-bottom: 15px;
+		color: #333;
+		text-decoration: underline;
+	}
+
+
+
+	</style>
+{% endblock css %}
+{% block content %}
+<div class="row">
+	{% if request.user.is_authenticated %}
+		<div class="col-lg-10">
+	{% else %}
+		<div class="col-lg-12">
+	{% endif %}
+	<div class="breadcrumb">
+		<div class="row">
+			<div class="col-lg-10">
+				<p class="b-desc">You are here: <a class="b-desc-b" href="{% url 'homepage' %}">Edventure</a> <img src="{% static 'images/breadcrumb-icon.png' %}"> <a class="b-desc-c" href="{% url 'category' slug_cat=content.category.slug %}">{{content.category.title}}</a> <img src="{% static 'images/breadcrumb-icon.png' %}">
+				<a class="b-desc-d">{{content.title}}</a></p>
+			</div>
+			<div class="col-lg-2 text-right">
+				<a class="b-desc-b" href="{% url 'category' slug_cat=content.category.slug %}">Back to category</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-wrapper">
+			
+			<div class="row">
+				{% if request.user.is_authenticated %}
+					<div class="col-lg-7 left-content">
+				{% else %}
+					<div class="col-lg-7 left-content">
+				{% endif %}
+				
+					<h2 class="content-heading">{{content.title}}</h2>
+					<img class="content-icon" src="http://127.0.0.1:8000/media/{{content.content_type.image}}">
+					{% if content.embed_code %}
+						<div class="video">{{content.embed_code_bigger|safe}}</div>
+					{% else %}
+						<div class="content-image"><img class="detail-image" src="http://127.0.0.1:8000/media/{{content.image}}"></div>
+					{% endif %}
+					<div class="buttons">
+					<a href="{% url 'add_to_list' content.slug %}" class="add">
+						<form action='{% url "add_to_list" content.slug %}' method='POST'>{% csrf_token %}
+							<img class="todo-icon" src="{% static 'images/todo-icon.png' %}"><input type="submit" name='state' value='Favourite' class="todo-btn">
+							<img class="done-icon" src="{% static 'images/done-icon.png' %}"><input type="submit" name='state' value='Learned' class="done-btn">
+							<img class="later-icon" src="{% static 'images/later-icon.png' %}"><input type="submit" name='state' value='Later' class="later-btn">
+						</form>
+					</a>
+				</div>
+					<p class="share text-center">Share <span class="share-link">{{request.path}}</span>
+						<a class="tw-share" href="https://twitter.com/home?status={{content.get_share_message|safe}}"><img src="{% static 'images/twitter-share.png' %}"></a>
+						<a class="fb-share" href="https://www.facebook.com/sharer/sharer.php?u={{content.get_share_link}}"><img src="{% static 'images/facebook-share.png' %}"></a>
+					</p>
+					{% disqus_show_comments %}
+				</div>
+
+			{% if request.user.is_authenticated %}
+					<div class="col-lg-5">
+				{% else %}
+					<div class="col-lg-5">
+				{% endif %}
+				<p class="added">Added: {{content.created_date}}</p>
+				<p class="description">{{content.description}}</p>
+				<p class="content-author">Reccommend by:
+					{% if content.reccommend_by != None and content.approved_by_admin = True %}
+
+					<a href="{% url 'single-user' id=content.reccommend_by.author.id %}">{{ content.reccommend_by.author.first_name }} {{ content.reccommend_by.author.last_name }}</a>
+					{% else %}
+					Admin
+					{% endif %}
+				</p>
+				<div class="source-link"><a href="{{content.source.source_link}}">Visit original source</a></div>
+				<div class="related-content col-lg-10">
+					<h4 class="related-content-heading">Next steps</h4>
+						{% for item in related_items %}
+							
+						
+						
+							<a class="related-heading" href="{% url 'content-detail' slug_con=item.slug %}">
+								<p class="related-heading">{{ item.title }}</p>
+							</a>
+							<img class="r-icon" src="http://127.0.0.1:8000/media/{{item.content_type.image}}">
+							
+							<p class="related-desc">{{item.description|truncatechars:155}}</p>
+
+
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+{% endblock content %}

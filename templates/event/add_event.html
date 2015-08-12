@@ -1,0 +1,172 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load gravatar %}
+{% load endless %}
+{% block title %}Events{% endblock title %}
+{% block css %}
+    <style>
+    
+        .main-image {
+    background: url('https://trello-attachments.s3.amazonaws.com/5585ac604e4d95cb6a64c0a7/1263x250/07766f9db2f1a615eea17409ea5346d5/banner5.png') no-repeat center center;
+    height: 245px;
+    position: relative;
+    margin-top: -20px;
+}       
+        .content-box {
+            position: relative;
+            padding: 0px;
+        }
+
+        .event-title {
+            margin-left: 15px;
+            color: #333;
+        }
+
+        .event-title:hover {
+            color: #b96769;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        img.event-user.pull-right {
+              top: 108px;
+  right: 25px;
+  position: absolute;
+  border-radius: 50%;
+        }
+
+        .date {
+            margin-right: 15px;
+        }
+
+        .city {
+            margin-left: 15px;
+        }
+
+        .event-description {
+            margin-top: 5px;
+            margin-left: 15px;
+            padding: 15px 15px;
+            background: #b96769;
+            color: #fff;
+        }
+
+        .categories {
+            display: none;
+        }
+
+        .content-type-item {
+            display: none;
+        }
+        .current-events {
+            margin-top: -22px;
+            padding-bottom: 25px;
+        }
+
+        .errorlist {
+            display: none;
+        }
+         
+
+         {% if request.user.is_authenticated %}
+         .current-events {
+            margin-top: 35px;
+            padding-bottom: 25px;
+        }
+    ul.nav.navbar-nav.pull-right {
+      margin-top: -47px;
+    }
+
+    .sidebar {
+        margin-top: 0px;
+    }
+    {% endif %} 
+
+    input,
+    div#id_event_start_picker,
+    div#id_event_end_picker,
+    div#id_time_of_event_picker,
+    textarea,
+    select#id_category {
+        width: 50%;
+    }
+
+    .back-btn:hover {
+         color: #b96769;
+    }
+    .back-btn {
+        float: left;
+  margin-right: 35px;
+  border: 1px solid #b96769;
+  padding: 10px 25px;
+  color: #b96769;
+}
+    input.btn.btn-event {
+          width: 25%;
+  padding: 10px 15px;
+  background: #b96769;
+  color: #fff;
+    }
+    ul.nav.navbar-nav.pull-right {
+                                margin-top: 0;
+                            }
+        </style>
+
+        {% endblock css %}
+
+{% block news %}
+<div class="left-news">
+        <h3 class="banner-heading text-center">Event of the month</h3>
+            <p class="course-name">{{ month_event.title }}</p>
+        
+            
+                <a href="{% url 'event-detail' slug=month_event.slug %}">
+                    <button class="course-login">Join event</button>
+                </a>
+            
+      </div>
+{% endblock news %}
+{% block form %}
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js">
+        </script>
+
+{{ form_event.media }}
+{% endblock form %}
+{% block content %}
+<div class="row">
+<div class="col-lg-8">
+<h2 class="add_event">Add new event</h2>
+<form method="post" role="form">
+            {% for field in form_event.visible_fields %}
+            <div id="div_{{ field.html_name }}" 
+                 class="form-group{% if field.errors %} has-error{% endif %}">
+                {{ field.label_tag }}
+                {{ field }}
+                <div class="text-muted pull-right">
+                    <small>{{ field.help_text }}</small>
+                </div>
+                <div class="help-block">
+                    {{ field.errors }}
+                </div>
+            </div>
+            {% endfor %}
+            {% for hidden in form_event.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% csrf_token %}
+            <div class="event-buttons">
+            <a class="back-btn" href="{% url 'events' %}">Back to events</a>
+            <div class="form-group">
+                <input type="submit" value="Create new event" class="btn btn-event" />
+            </div>
+            </div>
+
+        </form>
+</div>
+</div>
+    
+{% endblock content %}

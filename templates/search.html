@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Search results{% endblock title %}
+{% block css %}
+<style>
+.content-type, .user-wrapper { display: none;}
+.query-result {
+	color: #fe6f17;
+}
+.search-result {
+	margin-top: -25px;
+	padding-bottom: 15px;
+}
+</style>
+{% endblock css %}
+{% block content %}
+	<h4 class="search-result">You search for: <span class="query-result">{{query}}</span></h4>
+	{% for content in contents %}
+	<div class="col-lg-4 content-bigger">
+		<div class="content-box">
+			<h3 class="content-title">{{content.title}}</h3>
+			<img class="content-image-icon pull-right" src="http://127.0.0.1:8000/media/{{content.content_type.image}}"/>
+			{% if content.embed_code %}
+				<div class="content-video">{{content.embed_code|safe}}</div>
+			{% else %}
+				<img class="content-image text-center" src="http://127.0.0.1:8000/media/{{content.image}}"/>
+			{% endif %}
+			<p class="content-description">{{content.description|truncatechars:155}}</p>
+		</div>
+	</div>
+	{% empty %}
+	<p class="search-empty">{{message}}</p>
+	{% endfor %}
+{% endblock %}

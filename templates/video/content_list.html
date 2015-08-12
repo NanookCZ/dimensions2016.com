@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Content{% endblock title %}
+{% block css %}
+	<style>
+		.content-up {
+			top: 402px;
+			color: #333;
+		}
+
+		a {
+			color: #333;
+		}
+
+		.content-box {
+			position: relative;
+			padding: 0px;
+		}
+
+		.content-title {
+			margin-left: 15px;
+			color: #333;
+		}
+
+		.content-title:hover {
+			color: #b96769;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: none;
+		}
+
+
+		.date {
+			margin-left: 15px;
+			width: 60%;
+			padding-bottom: 15px;
+		}
+
+		
+		.content-description {
+			margin-top: 5px;
+			margin-left: 15px;
+			padding: 15px 15px;
+			background: #b96769;
+			color: #fff;
+		}
+
+		img.content-icon.pull-right {
+			  right: 29px;
+  			top: 140px;
+  			position: absolute;
+		}
+
+		.container.main-content {
+			min-height: 300px;
+		}
+		
+	</style>
+{% endblock css %}
+
+{% block news %}
+<div class="left-news">
+		<h3 class="banner-heading text-center">Course of the month</h3>
+			<p class="course-name">{{ month_course.title }}</p>
+			{% if not request.user.is_authenticated %}
+          		<a href="http://127.0.0.1:8000/accounts/signup">
+          			<button class="course-login">Begin learning</button>
+          		</a>
+        	{% else %}
+        		<a href="{% url 'content-detail' slug_con=month_course.slug %}">
+          			<button class="course-login">Start course</button>
+          		</a>
+         	{% endif %}
+      </div>
+{% endblock news %}
+
+{% block content %}
+<div class="row">	
+
+	<p class="result-count col-lg-12">Number of found results in category {{obj_cat.title }} and content-type {{obj_con.title }} is {{ queryset.count }}.
+	</p>
+	<ul class="list-inline content-up">
+		<li class="content-hover">
+			<a href="{% url 'category' slug_cat=obj_cat.slug %}">All</a>
+		</li>
+
+		{% for content in content_types %}
+			<li class="content-hover">
+				<a href="{% url 'content-list' slug_cat=obj_cat.slug slug_con=content.slug  %}"><img src="http://127.0.0.1:8000/media/{{content.image}}"/> {{content.title}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+	
+	{% for content in queryset %}
+				{% if not request.user.is_authenticated %}
+					<div class="col-lg-6 content-bigger">
+				{% else %}
+					<style>
+						.content-bigger {
+							padding-top: 25px;
+						}
+					</style>
+					<div class="col-lg-5 content-bigger">
+				{% endif %}
+						<div class="content-box">
+							{% if request.user.is_authenticated %}
+								{% if content.category.title == 'Creativity' %}
+									<img class="img-responsive" src="{% static 'images/course_banner.png' %}">
+								{% elif content.category.title == 'Webtech' %}
+									<img class="img-responsive" src="{% static 'images/course_banner2.png' %}">
+								{% elif content.category.title == 'Enterpreneurship' %}
+									<img class="img-responsive" src="{% static 'images/course_banner3.png' %}">
+								{% elif content.category.title == 'Information literacy' %}
+									<img class="img-responsive" src="{% static 'images/course_banner4.png' %}">
+								{% elif content.category.title == 'Personal development' %}
+									<img class="img-responsive" src="{% static 'images/course_banner5.png' %}">
+								{% endif %}
+							{% else %}
+								{% if content.category.title == 'Creativity' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big.png' %}">
+								{% elif content.category.title == 'Webtech' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big2.png' %}">
+								{% elif content.category.title == 'Enterpreneurship' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big3.png' %}">
+								{% elif content.category.title == 'Information literacy' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big4.png' %}">
+								{% elif content.category.title == 'Personal development' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big5.png' %}">
+								{% endif %}
+							{% endif %}
+							<a href="{% url 'content-detail' slug_con=content.slug %}">
+								<h3 class="content-title">{{content.title}}</h3>
+							</a>
+							
+							<img class="content-icon pull-right" src="http://127.0.0.1:8000/media/{{content.content_type.image}}">
+							<div class="sources">
+								<p class="content-description">{{content.description|truncatechars:100}}</p>
+							</div>
+						</div>
+					</div>
+			{% endfor %}
+	</div>
+{% endblock content %}

@@ -31,7 +31,7 @@ SECRET_KEY = '8f$l)&i99b2@28t5(uad0yfh0-#c-4j9z&jlkcm$sp6c=-1$dy'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+FULL_DOMAIN_NAME = 'https://edventure2015.herokuapp.com/'
 
 # Application definition
 

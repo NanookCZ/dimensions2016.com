@@ -1,0 +1,401 @@
+body {
+	background: red;
+	color: #333;
+}
+
+a {
+	cursor: pointer !important;
+}
+
+a:hover {
+	cursor: pointer !important;
+}
+.navbar-default {
+	background: #f2f9f8;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #333;
+	text-decoration: underline;
+}
+
+.header-desc {
+	color: #333;
+	font-size: 16px;
+}
+
+.search-content {
+	margin-left: 25px;
+	margin-top: 10px;
+
+}
+
+.search-content input {
+  width: 300px;
+  line-height: normal;
+  height: 35px;
+  color: #999999;
+  padding-left: 10px;
+  background: #fff;
+  }
+
+  .auth {
+  	padding-left: 25px;
+  }
+
+ .facebook-login {
+ 	margin-top: -5px;
+ 	margin-right: 10px;
+ }
+
+ .categories {
+ 	margin-top: -20px;
+ 	padding-top: 20px;
+ 	padding-bottom: 15px;
+ 	background: #fff;
+ 	border-bottom: 1px solid #d5ded8;
+ }
+
+ .category-items > a {
+ 	color: #566c89;
+ 	font-weight: bold;
+ 	padding-left: 25px;
+ 	padding-right: 25px;
+ }
+
+ .category-items > a:hover {
+ 	text-decoration: none;
+ 	color: #fe6f17;
+ }
+
+.featured {
+  margin-top: -20px;
+  padding-top: 25px;
+  margin-bottom: -25px;
+  padding-bottom: 25px;
+  background: #fe6f17;
+}
+
+.featured a {
+	color: #fff;
+}
+
+.featured a:hover {
+	color: #fff;
+}
+
+.subscribe-me {
+	padding: 5px 5px;
+	border: 1px solid #dddddd;
+	border-radius: 5%;
+}
+
+.subscribe-me a {
+	color : #666666;
+}
+
+.subscribe-me a:hover {
+	color : #666666;
+}
+
+.main-image {
+	background: url('https://trello-attachments.s3.amazonaws.com/5585ac604e4d95cb6a64c0a7/1600x501/23b3f10890d898f8323e821870837f57/banner.png') no-repeat center center;
+  	height: 400px;
+  	position: relative;
+  	margin-top: 61px;
+}
+
+.btn-sign-up {
+	position: absolute;
+	top: 305px;
+	left: 39%;
+	padding: 15px 25px;
+	background: #fe6f17;
+	color: #fff;
+}
+
+.btn-sign-up:hover {
+	color: #fff;
+}
+
+.sign-up-icon {
+	margin-top: -7px;
+	margin-right: 7px;
+}
+
+.content-type {
+	padding-top: 25px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.content-type-desc {
+	color: #333;
+	font-weight: bold;
+	margin-left: 0px;
+	margin-right: 15px;
+}
+
+.content-type-item a {
+	color: #566c89;
+	text-decoration: underline;
+	font-weight: bold;
+	padding-left: 15px;
+}
+
+.main-content {
+	padding-top: 45px;
+}
+.content-box {
+	background: #fff;
+	width: 100%;
+	height: 380px;
+	padding: 15px 15px;
+	position: relative;
+	padding-bottom: 45px;
+	margin-bottom: 35px;
+}
+
+.content-title {
+	font-size: 22px;
+	width: 80%;
+	float: left;
+}
+
+.content-image-icon {
+	margin-top: 25px;
+	margin-right: 10px;
+}
+
+.content-video {
+	padding-top: 25px;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.content-image {
+	padding-bottom: 15px;
+	position: absolute;
+	display: block;
+	left: 80px;
+	top: 115px;
+	height: 150px;
+
+}
+
+.content-description {
+	position: absolute;
+	bottom: 15px;
+}
+
+
+.content-up {
+	position: absolute;
+  	top: 159px;
+  	left: 236px;
+  	color: #333;
+	font-weight: bold;
+	margin-left: 0px;
+	margin-right: 15px;
+}
+
+.content-hover a:hover {
+	color: #fe6f17;
+}
+
+.footer {
+	background: #fff;
+	padding-top: 19px;
+	padding-bottom: 10px;
+}
+
+.search-content img{
+	top: 7px;
+  	position: absolute;
+  	right: 15px;
+}
+
+.content-type-item a:hover {
+	color: #fe6f17;
+}
+
+.content-title {
+	color: #333;
+}
+
+.content-title:hover {
+	color: #fe6f17;
+}
+
+.copyright {
+	font-weight: bold;
+}
+
+.facebook-link,
+.twitter-link {
+	font-weight: bold;
+}
+
+.facebook-footer,
+.twitter-footer {
+	padding-left: 10px;
+	padding-right: 7px;
+	margin-top: -10px;
+}
+
+
+.facebook-link {
+	color: #566c89;
+}
+
+.twitter-link {
+	color: #00a1db;
+}
+
+.result-count {
+	margin-top: -20px;
+	padding-bottom: 25px;
+}
+
+.close {
+	padding-top: 5px;
+	margin-top: 1px;
+  	opacity: 1;
+  	font-size: 14px;
+  	color: #333;
+  	margin-left: 4px;
+}
+
+label {
+	display: none;
+}
+
+#id_link,
+#id_comment {
+	width: 150%;
+}
+
+#id_is_visible {
+	width: 150%;
+}
+#id_is_visible::after { 
+	margin-left: 20px;
+	color: #babdbd;
+    content: "I want to be mentioned as reccommender";
+}
+
+.btn-reccommend {
+	margin-top: 20px;
+	background: #fff;
+	color: #333;
+	padding: 10px 15px;
+	font-weight: bold;
+	border: 1px solid #babdbd;
+	border-radius: 4%;
+}
+
+.reccommend-heading {
+	font-size: 14px;
+  	margin-top: 2px;
+	font-weight: bold;
+	color: #fe6f17;
+}
+
+.reccommend-list li {
+	list-style: none;
+	margin-bottom: 7px;
+  	margin-left: -40px;
+}
+
+.reccommend-icon {
+	padding-right: 5px;
+}
+
+.user-wrapper {
+	margin-top: 55px;
+}
+
+.user-detail {
+	margin-left: -90px;
+  	margin-top: -10px;
+  }
+
+.edit-profile {
+	float: right;
+	text-align: right;
+}
+
+.edit-profile a {
+	color: #333;
+	text-decoration: underline;
+}
+
+.badge-icon {
+	margin-right: 10px;
+}
+
+.user-lists {
+	margin-top: -5px;
+}
+
+.user-list {
+	width: 200px;
+}
+
+.user-list:hover {
+	background: transparent;
+	border: 1px solid #cccccc;
+	border-bottom: none;
+}
+
+.user-list a {
+	text-align: center;
+	color: #333;
+	font-size: 18px;
+}
+
+.nav-tabs>li>a:hover {
+
+	border-bottom: none;
+}
+
+.nav>li>a:focus, .nav>li>a:hover, .nav>li>a:active {
+	background: transparent;
+}
+
+.nav-tabs {
+	border-bottom: none;
+}
+
+.list-icon {
+	margin-right: 5px;
+}
+
+.todo-btn,
+.done-btn {
+	  background: #fff;
+  border: none;
+  padding: 10px 45px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4%;
+
+}
+
+.buttons {
+	position: relative;
+}
+
+.todo-icon,
+.done-icon{
+	position: absolute;
+  left: 15px;
+  top: 13px;
+}
+
+.done-icon {
+	left: 159px;
+}
+

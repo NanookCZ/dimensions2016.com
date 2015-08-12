@@ -48,8 +48,8 @@ class ContentBase(models.Model):
 	objects = ContentBaseManager()
 	month_course = models.CharField(max_length = 10, blank = True, null = True, default='no')
 
-	def __str__(self):
-		return str(self.id)
+	def __unicode__(self):
+		return "%s" %(self.title)
 
 	def get_title(self):
 		return str(self.title)
@@ -79,7 +79,7 @@ class ContentBase(models.Model):
 
 
 class Source(models.Model):
-	title = models.CharField(max_length = 100, blank = True, null = True, default = "Unknown")
+	title = models.CharField(max_length = 100, blank = True, null = True)
 	source_link = models.URLField(max_length = 100, blank = True, null = True)
 	active = models.BooleanField(default = True)
 

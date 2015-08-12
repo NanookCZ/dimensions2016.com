@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'endless_pagination',
     'easy_maps',
     'bootstrap3_datetime',
-    'cloudinary',
+    #'cloudinary',
 )
 
 

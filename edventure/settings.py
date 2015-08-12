@@ -51,13 +51,13 @@ INSTALLED_APPS = (
 )
 
 
-"""
+
 cloudinary.config( 
   cloud_name = "hiurimyor", 
   api_key = "964795216427314", 
   api_secret = "AxCZXOv6A-sKwG8Y-EYx9th_6S0" 
 )
-"""
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

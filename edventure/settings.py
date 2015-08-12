@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import datetime
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,6 +46,13 @@ INSTALLED_APPS = (
     'endless_pagination',
     'easy_maps',
     'bootstrap3_datetime',
+    'cloudinary',
+)
+
+cloudinary.config( 
+  cloud_name = "hiurimyor", 
+  api_key = "964795216427314", 
+  api_secret = "AxCZXOv6A-sKwG8Y-EYx9th_6S0" 
 )
 
 MIDDLEWARE_CLASSES = (

@@ -38,6 +38,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_gravatar',
+    'disqus',
+    'endless_pagination',
+    'easy_maps',
+    'bootstrap3_datetime',
 )
 
 MIDDLEWARE_CLASSES = (

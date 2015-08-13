@@ -6,7 +6,7 @@
 <style>
 .content-type, .user-wrapper { display: none;}
 .query-result {
-	color: #fe6f17;
+	color: #b96769;
 }
 .search-result {
 	margin-top: 25px;
@@ -79,7 +79,7 @@
 {% endblock news %}
 {% block content %}
 	<div class="row">
-		<h4 class="search-result">You search for: <span class="query-result">{{query}}</span></h4>
+		<h4 class="col-lg-12 search-result">You search for: <span class="query-result">{{query}}</span></h4>
 		
 			{% for content in contents %}
 				{% if not request.user.is_authenticated %}

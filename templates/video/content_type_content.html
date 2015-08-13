@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load cloudinary %}
 {% block title %}{{obj.title}}{% endblock title %}
 {% block css %}
 	<style>
@@ -64,7 +65,7 @@
 		<h3 class="banner-heading text-center">Course of the month</h3>
 			<p class="course-name">{{ month_course.title }}</p>
 			{% if not request.user.is_authenticated %}
-          		<a href="http://127.0.0.1:8000/accounts/signup">
+          		<a href="https://edventure2015.herokuapp.com/accounts/signup">
           			<button class="course-login">Begin learning</button>
           		</a>
         	{% else %}
@@ -121,7 +122,7 @@
 								<h3 class="content-title">{{content.title}}</h3>
 							</a>
 							
-							<img class="content-icon pull-right" src="http://127.0.0.1:8000/media/{{content.content_type.image}}">
+							<div class="content-icon pull-right">{% cloudinary content.content_type.image %}</div>
 							<div class="sources">
 								<p class="content-description">{{content.description|truncatechars:100}}</p>
 							</div>

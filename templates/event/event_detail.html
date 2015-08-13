@@ -228,11 +228,15 @@
                   <div class="modal-body">
                     <div class="row">
                       <div class="col-lg-5">
+                         {% if request.user.is_authenticated %}
                         <p class="event-modal">Do you attend this event?</p>
                         <form action='' method='POST'>{% csrf_token %}
                           {{ form.as_p }}
                           <input type='submit' value = 'Join' class="btn-reccommend">
                         </form>
+                        {% else %}
+                        <p class="event-modal">At first you should <a href="https://edventure2015.herokuapp.com/accounts/login/">login</a></p>
+                        {% endif %}
                       </div>
                     </div>
                   </div>

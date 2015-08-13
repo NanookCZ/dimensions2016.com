@@ -25,8 +25,8 @@ class ContentBaseManager(models.Manager):
 
 DEFAULT_MESSAGE = "Checkout this awesome video.  "
 class ContentBase(models.Model):
-	title = models.CharField(max_length = 50)
-	slug = models.SlugField(max_length = 50, unique = True)
+	title = models.CharField(max_length = 150)
+	slug = models.SlugField(max_length = 150, unique = True)
 	description = models.TextField()
 	category = models.ForeignKey("Category", null = True, blank = True)
 	content_type = models.ForeignKey("ContentType", null = True, blank = True)

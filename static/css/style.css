@@ -477,3 +477,9 @@ label {
 .main-image {
 	margin-top: -20px;
 }
+
+.content-icon.pull-right {
+	    position: absolute;
+    right: 36px;
+    top: 137px;
+}

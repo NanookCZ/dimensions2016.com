@@ -29,9 +29,7 @@ class EventForm(forms.ModelForm):
     event_end = forms.DateField(
         widget=DateTimePicker(options={"format": "YYYY-MM-DD",
                                        "pickTime": False}))
-    time_of_event = forms.DateField(
-        widget=DateTimePicker(options={"format": "HH:mm:ss",
-                                       "pickDate": False}))
+
     class Meta:
         model = Event
         fields = ('title', 'description', 'event_start', 'event_end', 'time_of_event', 'street_address', 'city', 'state', 'zip_code', 'telephone', 'category')

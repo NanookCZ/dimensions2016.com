@@ -170,6 +170,7 @@
 
         <hr class="event-divider">
         <div class="guests col-lg-12">
+          {% if quest.attending_status == 'yes' %}
           <h6>Participants - Attending</h6>
             {% for guest in guests %}
                 <ul class="list-inline">
@@ -181,6 +182,7 @@
                 {% endif %}
                 </ul>
             {% endfor %}
+            {% endif %}
           </div>
 
           <hr class="event-divider">

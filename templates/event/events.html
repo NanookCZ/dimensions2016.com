@@ -117,27 +117,27 @@
 				<div class="content-box">
 					{% if request.user.is_authenticated %}
 						{% if event.category.title == 'Creativity' %}
-						<img src="{% static 'images/event_banner1.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner1.png' %}">
 						{% elif event.category.title == 'Webtech' %}
-						<img src="{% static 'images/event_banner2.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner2.png' %}">
 						{% elif event.category.title == 'Enterpreneurship' %}
-						<img src="{% static 'images/event_banner3.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner3.png' %}">
 						{% elif event.category.title == 'Information literacy' %}
-						<img src="{% static 'images/event_banner4.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner4.png' %}">
 						{% elif event.category.title == 'Personal development' %}
-						<img src="{% static 'images/event_banner5.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner5.png' %}">
 						{% endif %}
 					{% else %}
 						{% if event.category.title == 'Creativity' %}
-						<img src="{% static 'images/event_banner_big1.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner_big1.png' %}">
 						{% elif event.category.title == 'Webtech' %}
-						<img src="{% static 'images/event_banner_big2.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner_big2.png' %}">
 						{% elif event.category.title == 'Enterpreneurship' %}
-						<img src="{% static 'images/event_banner_big3.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner_big3.png' %}">
 						{% elif event.category.title == 'Information literacy' %}
-						<img src="{% static 'images/event_banner_big4.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner_big4.png' %}">
 						{% elif event.category.title == 'Personal development' %}
-						<img src="{% static 'images/event_banner_big5.png' %}">
+						<img class="img-responsive" src="{% static 'images/event_banner_big5.png' %}">
 						{% endif %}
 					{% endif %}
 

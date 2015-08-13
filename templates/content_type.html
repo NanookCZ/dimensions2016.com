@@ -5,7 +5,7 @@
 	</li>
 	{% for content_type in content_types %}
 		<li>
-			<a href="{% url 'content-type' slug_con=content_type.slug  %}"><img src="http://127.0.0.1:8000/media/{{content_type.image}}" /> {{content_type.title}}</a>
+			<a href="{% url 'content-type' slug_con=content_type.slug  %}">{% cloudinary content_type.image %} {{content_type.title}}</a>
 		</li>
 	{% endfor %}
 {% endif %}

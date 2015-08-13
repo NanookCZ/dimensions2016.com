@@ -78,7 +78,7 @@
 {% block content %}
 	<div class="row">
 		<h4 class="search-result">You search for: <span class="query-result">{{query}}</span></h4>
-		{% paginate contents %}
+		
 			{% for content in contents %}
 				{% if not request.user.is_authenticated %}
 					<div class="col-lg-6 content-bigger">
@@ -134,6 +134,6 @@
 						</div>
 					</div>
 			{% endfor %}
-		{% show_pages %}
+		
 	</div>
 {% endblock content %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load cloudinary %}
 {% load disqus_tags %}
 {% block title %}{{content.title}}{% endblock title %}
 {% block css %}
@@ -279,11 +280,12 @@
 				{% endif %}
 				
 					<h2 class="content-heading">{{content.title}}</h2>
-					<img class="content-icon" src="http://127.0.0.1:8000/media/{{content.content_type.image}}">
-					{% if content.embed_code %}
+					<div class="content-icon">{% cloudinary content.content_type.image %}</div>
+					{% if content.embed_code_bigger %}
 						<div class="video">{{content.embed_code_bigger|safe}}</div>
 					{% else %}
-						<div class="content-image"><img class="detail-image" src="http://127.0.0.1:8000/media/{{content.image}}"></div>
+						<div class="content-image"><div class="detail-image"> {% cloudinary content.image %}</div>
+						</div>
 					{% endif %}
 					<div class="buttons">
 					<a href="{% url 'add_to_list' content.slug %}" class="add">
@@ -326,7 +328,7 @@
 							<a class="related-heading" href="{% url 'content-detail' slug_con=item.slug %}">
 								<p class="related-heading">{{ item.title }}</p>
 							</a>
-							<img class="r-icon" src="http://127.0.0.1:8000/media/{{item.content_type.image}}">
+							<div class="r-icon">{% cloudinary item.content_type.image %}</div>
 							
 							<p class="related-desc">{{item.description|truncatechars:155}}</p>
 

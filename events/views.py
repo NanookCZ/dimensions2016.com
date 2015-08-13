@@ -6,6 +6,7 @@ from django.template import RequestContext
 from .models import Event, Guest
 from .forms import GuestForm, EventForm
 from videos.models import Category
+from django.contrib.auth.decorators import login_required
 
 
 def event_view(request):
@@ -16,6 +17,7 @@ def event_view(request):
 	template_name = 'event/events.html'
 	return render(request, template_name, context)
 
+@login_required
 def user_event_view(request):
 	the_user = request.user
 	events = Event.objects.filter(hosted_by=the_user)
@@ -25,8 +27,12 @@ def user_event_view(request):
 	template_name = 'event/my_events.html'
 	return render(request, template_name, context)
 
+@login_required
 def attending_view(request):
-	the_user = request.user
+	try:
+		the_user = request.user
+	except:
+		the_user = None
 	events = Guest.objects.filter(user=the_user, attending_status = 'yes')
 	print(events)
 	month_event = Event.objects.get(month_event = 'yes')
@@ -81,7 +87,7 @@ def event_detail(request, slug):
 	template_name = 'event/event_detail.html'
 	return render(request, template_name, context)
 
-
+@login_required
 def add_event(request):
 	the_user = request.user
 	month_event = Event.objects.get(month_event = 'yes')
@@ -118,7 +124,7 @@ def add_event(request):
 	context = {'month_event':month_event, "form_event" : form_event}
 	template_name = 'event/add_event.html'
 	return render(request, template_name, context)
-
+@login_required
 def edit_event(request, id):
 	user = request.user
 	event = Event.objects.get(id=id)

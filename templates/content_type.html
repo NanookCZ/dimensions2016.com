@@ -1,3 +1,4 @@
+{% load cloudinary %}
 {% if request.path == '/' or request.path == '/content/content-type/books/' or request.path == '/content/content-type/courses/' or request.path == '/content/content-type/textbooks/' or request.path == '/content/content-type/videos/'%}
 	<li>
 		<a href="{% url 'homepage'  %}">All</a>
@@ -13,32 +14,32 @@
 	{% for category in categories %}
 		{% if request.path == '/content/category/creativity/' and category.title == 'Creativity' %}
 			<li class="content-type-item">
-				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}"><img src="http://127.0.0.1:8000/media/{{content_type.image}}" /> {{content_type.title}}</a>
+				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}">{% cloudinary content_type.image %} {{content_type.title}}</a>
 			</li>
 		{% endif %}
 		{% if request.path == '/content/category/enterpreneurship/' and category.title == 'Enterpreneurship' %}
 			<li class="content-type-item">
-				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}"><img src="http://127.0.0.1:8000/media/{{content_type.image}}" /> {{content_type.title}}</a>
+				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}">{% cloudinary content_type.image %} {{content_type.title}}</a>
 			</li>
 		{% endif %}
 		{% if request.path == '/content/category/information-literacy/' and category.title == 'Information literacy' %}
 			<li class="content-type-item">
-				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}"><img src="http://127.0.0.1:8000/media/{{content_type.image}}" /> {{content_type.title}}</a>
+				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}">{% cloudinary content_type.image %} {{content_type.title}}</a>
 			</li>
 		{% endif %}
 		{% if request.path == '/content/category/personal-development/' and category.title == 'Personal development' %}
 			<li class="content-type-item">
-				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}"><img src="http://127.0.0.1:8000/media/{{content_type.image}}" /> {{content_type.title}}</a>
+				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}">{% cloudinary content_type.image %} {{content_type.title}}</a>
 			</li>
 		{% endif %}
 		{% if request.path == '/content/category/webtech/' and category.title == 'Webtech' %}
 			<li class="content-type-item">
-				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}"><img src="http://127.0.0.1:8000/media/{{content_type.image}}" /> {{content_type.title}}</a>
+				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}">{% cloudinary content_type.image %} {{content_type.title}}</a>
 			</li>
 		{% endif %}
 		{% if request.path == '/content/category/other/' and category.title == 'Other' %}
 			<li class="content-type-item">
-				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}"><img src="http://127.0.0.1:8000/media/{{content_type.image}}" /> {{content_type.title}}</a>
+				<a href="{% url 'content-list' slug_cat=category.slug slug_con=content_type.slug  %}">{% cloudinary content_type.image %} {{content_type.title}}</a>
 			</li>
 		{% endif %}
 	{% endfor %}

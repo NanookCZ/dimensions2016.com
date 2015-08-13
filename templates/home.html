@@ -58,7 +58,7 @@
 
 {% block news %}
 <div class="left-news">
-		<h3 class="banner-heading text-center">Course of the month</h3>
+		<h3 class="banner-heading">Course of the month</h3>
 			<p class="course-name">{{ month_course.title }}</p>
 			{% if not request.user.is_authenticated %}
           		<a href="https://edventure2015.herokuapp.com/accounts/signup">
@@ -121,8 +121,8 @@
 							<a href="{% url 'content-detail' slug_con=content.slug %}">
 								<h3 class="content-title">{{content.title}}</h3>
 							</a>
-							{% cloudinary content.content_type.image %}
-							<img class="content-icon pull-right" src="media/{{content.content_type.image}}">
+							
+							<div class="content-icon pull-right">{% cloudinary content.content_type.image %}</div>
 							<div class="sources">
 								<p class="content-description">{{content.description|truncatechars:100}}</p>
 							</div>

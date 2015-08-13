@@ -31,7 +31,7 @@ class UserProfile(models.Model):
 class UserContentItem(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, null = True, blank = True)
 	content = models.ForeignKey(ContentBase, blank = True, null = True, related_name = 'ContentBases')
-	content_state = models.CharField(max_length = 7, blank = True, null = True, default = "None")
+	content_state = models.CharField(max_length = 23, blank = True, null = True, default = "None")
 	active = models.BooleanField(default = True)
 
 	def __unicode__(self):

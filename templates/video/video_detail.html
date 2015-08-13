@@ -73,6 +73,7 @@
 	.content-icon {
 		float: right;
 		margin-top: -35px;
+		    margin-right: 25px;
 	}
 	.video {
 		margin-top: 26px;
@@ -315,10 +316,10 @@
 
 					<a href="{% url 'single-user' id=content.reccommend_by.author.id %}">{{ content.reccommend_by.author.first_name }} {{ content.reccommend_by.author.last_name }}</a>
 					{% else %}
-					Admin
+					Edventure admin
 					{% endif %}
 				</p>
-				<div class="source-link"><a href="{{content.source.source_link}}">Visit original source</a></div>
+				<div class="source-link"><a target="new" href="{{content.source.source_link}}">Visit original source</a></div>
 				<div class="related-content col-lg-10">
 					<h4 class="related-content-heading">Next steps</h4>
 						{% for item in related_items %}

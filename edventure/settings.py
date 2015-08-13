@@ -105,6 +105,9 @@ cloudinary.config(
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
+DISQUS_API_KEY = 'Ubk2FM1xibPyvbWSm6tKwLBBjEXdsdylYJli2YEEbEARjP3cVDDDf91vMMabr7tK'
+DISQUS_WEBSITE_SHORTNAME = 'Edventure'
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

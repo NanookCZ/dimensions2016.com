@@ -72,7 +72,7 @@ class ContentBase(models.Model):
 
 	def get_share_message(self):
 		full_url = "%s%s" %(settings.FULL_DOMAIN_NAME, self.get_absolute_url())
-		return urllib2.urlopen("%s%s" %(self.share_message,  full_url))
+		return urllib2.Request.get_full_url("%s%s" %(self.share_message,  full_url))
 
 	class Meta:
 		ordering = ['created_date']

@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load gravatar %}
+{% load cloudinary %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -99,7 +100,7 @@
                           <input type='submit' value = 'Reccommend' class="btn-reccommend">
                         </form>
                       {% else %}
-                        <p>For reccommending content you must <a href="http://127.0.0.1:8000/accounts/login/">login</a>.</p>
+                        <p>For reccommending content you must <a href="https://edventure2015.herokuapp.com/accounts/login/">login</a>.</p>
                       {% endif %}
                     </div>
                     
@@ -126,17 +127,17 @@
               <a href="{% url 'single-user' id=request.user.id %}">{{user.username}}</a>
             </li>
             <li class="logout">
-              <a href="http://127.0.0.1:8000/accounts/logout">Logout</a>
+              <a href="https://edventure2015.herokuapp.com/accounts/logout">Logout</a>
             </li>
           {% else %}
             <li class="auth sign-up">
-              <a href="http://127.0.0.1:8000/accounts/signup">
+              <a href="https://edventure2015.herokuapp.com/accounts/signup">
                 <img class="facebook-login" src="{% static 'images/facebook-icon.png' %}" />
                   <strong>Sign up</strong>
                 </a>
             </li>
             <li class="login">
-              <a href="http://127.0.0.1:8000/accounts/login/"><strong>Login</strong></a>
+              <a href="https://edventure2015.herokuapp.com/accounts/login/"><strong>Login</strong></a>
             </li>
           {% endif %}
         </ul>

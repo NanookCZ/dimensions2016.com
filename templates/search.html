@@ -10,24 +10,130 @@
 	margin-top: -25px;
 	padding-bottom: 15px;
 }
+{% if request.user.is_authenticated %}
+    
+    ul.nav.navbar-nav.pull-right {
+      margin-top: -47px;
+    }
+
+    
+    {% endif %} 
+		.content-box {
+			position: relative;
+			padding: 0px;
+		}
+
+		.content-title {
+			margin-left: 15px;
+			color: #333;
+		}
+
+		.content-title:hover {
+			color: #b96769;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: none;
+		}
+
+
+		.date {
+			margin-left: 15px;
+			width: 60%;
+			padding-bottom: 15px;
+		}
+
+		
+		.content-description {
+			margin-top: 5px;
+			margin-left: 15px;
+			padding: 15px 15px;
+			background: #b96769;
+			color: #fff;
+		}
+
+		img.content-icon.pull-right {
+			  right: 29px;
+  			top: 158px;
+  			position: absolute;
+		}
 </style>
 {% endblock css %}
+{% block news %}
+<div class="left-news">
+		<h3 class="banner-heading">Course of the month</h3>
+			<p class="course-name">{{ month_course.title }}</p>
+			{% if not request.user.is_authenticated %}
+          		<a href="https://edventure2015.herokuapp.com/accounts/signup">
+          			<button class="course-login">Begin learning</button>
+          		</a>
+        	{% else %}
+        		<a href="{% url 'content-detail' slug_con=month_course.slug %}">
+          			<button class="course-login">Start course</button>
+          		</a>
+         	{% endif %}
+      </div>
+{% endblock news %}
 {% block content %}
-	<h4 class="search-result">You search for: <span class="query-result">{{query}}</span></h4>
-	{% for content in contents %}
-	<div class="col-lg-4 content-bigger">
-		<div class="content-box">
-			<h3 class="content-title">{{content.title}}</h3>
-			<img class="content-image-icon pull-right" src="http://127.0.0.1:8000/media/{{content.content_type.image}}"/>
-			{% if content.embed_code %}
-				<div class="content-video">{{content.embed_code|safe}}</div>
-			{% else %}
-				<img class="content-image text-center" src="http://127.0.0.1:8000/media/{{content.image}}"/>
-			{% endif %}
-			<p class="content-description">{{content.description|truncatechars:155}}</p>
-		</div>
+	<div class="row">
+		<h4 class="search-result">You search for: <span class="query-result">{{query}}</span></h4>
+		{% paginate contents %}
+			{% for content in contents %}
+				{% if not request.user.is_authenticated %}
+					<div class="col-lg-6 content-bigger">
+					
+				{% else %}
+					<style>
+						.content-bigger {
+							padding-top: 25px;
+						}
+						img.content-icon.pull-right {
+							    top: 125px;
+							}
+							ul.nav.navbar-nav.pull-right {
+								margin-top: 0;
+							}
+					</style>
+					<div class="col-lg-5 content-bigger">
+				{% endif %}
+						<div class="content-box">
+							{% if request.user.is_authenticated %}
+								{% if content.category.title == 'Creativity' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big.png' %}">
+								{% elif content.category.title == 'Webtech' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big2.png' %}">
+								{% elif content.category.title == 'Enterpreneurship' %}
+								<img class="img-responsive" src="{% static 'images/course_banner_big3.png' %}">
+								{% elif content.category.title == 'Information literacy' %}
+								<img class="img-responsive"src="{% static 'images/course_banner_big4.png' %}">
+								{% elif content.category.title == 'Personal development' %}
+								<img class="img-responsive" src="{% static 'images/course_banner_big5.png' %}">
+								{% endif %}
+							{% else %}
+								{% if content.category.title == 'Creativity' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big.png' %}">
+								{% elif content.category.title == 'Webtech' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big2.png' %}">
+								{% elif content.category.title == 'Enterpreneurship' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big3.png' %}">
+								{% elif content.category.title == 'Information literacy' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big4.png' %}">
+								{% elif content.category.title == 'Personal development' %}
+									<img class="img-responsive" src="{% static 'images/course_banner_big5.png' %}">
+								{% endif %}
+							{% endif %}
+							<a href="{% url 'content-detail' slug_con=content.slug %}">
+								<h3 class="content-title">{{content.title}}</h3>
+							</a>
+							
+							<div class="content-icon pull-right">{% cloudinary content.content_type.image %}</div>
+							<div class="sources">
+								<p class="content-description">{{content.description|truncatechars:100}}</p>
+							</div>
+						</div>
+					</div>
+			{% endfor %}
+		{% show_pages %}
 	</div>
-	{% empty %}
-	<p class="search-empty">{{message}}</p>
-	{% endfor %}
-{% endblock %}
+{% endblock content %}

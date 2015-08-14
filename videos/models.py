@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-import urllib2
 import urllib
 from django.db import models
 from django.conf import settings
@@ -73,7 +72,7 @@ class ContentBase(models.Model):
 
 	def get_share_message(self):
 		full_url = "%s%s" %(settings.FULL_DOMAIN_NAME, self.get_absolute_url())
-		return urllib2.Request(self.share_message,  full_url)
+		return urllib.quote("%s%s" %(self.share_message, full_url))
 
 	class Meta:
 		ordering = ['created_date']

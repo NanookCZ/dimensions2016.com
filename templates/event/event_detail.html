@@ -170,7 +170,9 @@
 
         <hr class="event-divider">
         <div class="guests col-lg-12">
-          {% if quest.attending_status == 'yes' %}
+          {% if guest.count == 0 %}
+          0 guests
+          {% else %}
           <h6>Participants - Attending</h6>
             {% for guest in guests %}
                 <ul class="list-inline">
@@ -178,7 +180,8 @@
                   
                   
                     <li class="list-inline" style="float: left;"><a href="{% url 'single-user' id=guest.user.id %}"><img class="event-user" src="{% gravatar_url guest.user.email 55 %}"></a></li>
-                 
+                 {% else %}
+                 0 guests
                 {% endif %}
                 </ul>
             {% endfor %}
@@ -188,7 +191,7 @@
           <hr class="event-divider">
           
           <div class="guests col-lg-12">
-           {% if quest.attending_status == 'maybe' %}
+           
           <h6>Participants - Maybe</h6>
             {% for guest in guests %}
               <div class="col-lg-12">
@@ -201,7 +204,7 @@
                 {% endif %}
               </div>
             {% endfor %}
-            {% endif %}
+            
           </div>
           </div>
           

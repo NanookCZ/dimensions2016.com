@@ -101,7 +101,7 @@ def add_event(request):
 		print(form_event)
 		title = form_event.cleaned_data['title']
 		description = form_event.cleaned_data['description']
-		event_start = form_event.cleaned_data['event_starts']
+		event_start = form_event.cleaned_data['event_start']
 		event_end = form_event.cleaned_data['event_end']
 		time_of_event = form_event.cleaned_data['time_of_event']
 		hosted_by = the_user

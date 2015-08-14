@@ -170,18 +170,18 @@
 
         <hr class="event-divider">
         <div class="guests col-lg-12">
+          
+          <h6>Participants - Attending</h6>
           {% if guest.count == 0 %}
           0 guests
           {% else %}
-          <h6>Participants - Attending</h6>
             {% for guest in guests %}
                 <ul class="list-inline">
                 {% if guest.attending_status == 'yes' %}
                   
                   
                     <li class="list-inline" style="float: left;"><a href="{% url 'single-user' id=guest.user.id %}"><img class="event-user" src="{% gravatar_url guest.user.email 55 %}"></a></li>
-                 {% else %}
-                 0 guests
+                 
                 {% endif %}
                 </ul>
             {% endfor %}
@@ -193,18 +193,20 @@
           <div class="guests col-lg-12">
            
           <h6>Participants - Maybe</h6>
+          {% if guest.count == 0 %}
+          0 guests
+          {% else %}
             {% for guest in guests %}
               <div class="col-lg-12">
                 {% if guest.attending_status == 'maybe' %}
                   
                   <a href="{% url 'single-user' id=guest.user.id %}"><img class="event-user" src="{% gravatar_url guest.user.email 55 %}"></a>
-                {% else %}
-                0 maybe participants
+                
                     
                 {% endif %}
               </div>
             {% endfor %}
-            
+            {% endif %}
           </div>
           </div>
           

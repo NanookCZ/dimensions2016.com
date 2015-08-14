@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import urllib2
-import urllib.request
+import urllib
 from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse 

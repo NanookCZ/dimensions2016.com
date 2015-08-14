@@ -7,13 +7,15 @@ from .models import Event, Guest
 from .forms import GuestForm, EventForm
 from videos.models import Category
 from django.contrib.auth.decorators import login_required
+from videos.views import reccommend_content
 
 
 def event_view(request):
 	events = Event.objects.all()
 	month_event = Event.objects.get(month_event = 'yes')
 	categories = Category.objects.all()
-	context = {'month_event':month_event, 'events' : events, 'categories' : categories}
+	form_r = reccommend_content(request)
+	context = {'form_r' : form_r, 'month_event':month_event, 'events' : events, 'categories' : categories}
 	template_name = 'event/events.html'
 	return render(request, template_name, context)
 
@@ -23,7 +25,8 @@ def user_event_view(request):
 	events = Event.objects.filter(hosted_by=the_user)
 	month_event = Event.objects.get(month_event = 'yes')
 	categories = Category.objects.all()
-	context = {'month_event':month_event, 'events' : events, 'categories' : categories}
+	form_r = reccommend_content(request)
+	context = {'form_r' : form_r, 'month_event':month_event, 'events' : events, 'categories' : categories}
 	template_name = 'event/my_events.html'
 	return render(request, template_name, context)
 
@@ -37,7 +40,8 @@ def attending_view(request):
 	print(events)
 	month_event = Event.objects.get(month_event = 'yes')
 	categories = Category.objects.all()
-	context = {'month_event':month_event, 'events' : events, 'categories' : categories}
+	form_r = reccommend_content(request)
+	context = {'form_r' : form_r, 'month_event':month_event, 'events' : events, 'categories' : categories}
 	template_name = 'event/attending.html'
 	return render(request, template_name, context)
 
@@ -57,7 +61,8 @@ def category_event(request, slug_cat):
 		u = None 
 	categories = Category.objects.all()
 	queryset = Event.objects.filter(category = obj_cat).order_by('created_date')
-	context = {'month_event':month_event, "u" : u, "obj_cat" : obj_cat, "queryset" : queryset, "categories" : categories}
+	form_r = reccommend_content(request)
+	context = {'form_r' : form_r, 'month_event':month_event, "u" : u, "obj_cat" : obj_cat, "queryset" : queryset, "categories" : categories}
 	template_name = 'event/category_event.html'
 	return render(request, template_name, context)
 
@@ -65,7 +70,7 @@ def event_detail(request, slug):
 	categories = Category.objects.all()
 	event = Event.objects.get(slug = slug)
 	guests = Guest.objects.filter(event = event.id, attending_status = 'yes')
-
+	form_r = reccommend_content(request)
 	participants = []
 
 	for g in guests:
@@ -83,7 +88,7 @@ def event_detail(request, slug):
 	
 	
 
-	context = {"categories" : categories, "event" : event, "guests" : guests, "form" : guest_form, "participants" : participants}
+	context = {"form_r" : form_r, "categories" : categories, "event" : event, "guests" : guests, "form" : guest_form, "participants" : participants}
 	template_name = 'event/event_detail.html'
 	return render(request, template_name, context)
 
@@ -121,9 +126,12 @@ def add_event(request):
 		event.save()
 		return HttpResponseRedirect(reverse('events'))
 
-	context = {'month_event':month_event, "form_event" : form_event}
+	form_r = reccommend_content(request)
+	context = {'form_r' : form_r, 'month_event':month_event, "form_event" : form_event}
 	template_name = 'event/add_event.html'
 	return render(request, template_name, context)
+
+
 @login_required
 def edit_event(request, id):
 	user = request.user
@@ -137,9 +145,10 @@ def edit_event(request, id):
 	if event_form.is_valid():
 		event_form = event_form.save(commit = False)
 		event_form.save()
-		
+	
+	form_r = reccommend_content(request)
 	template_name = 'event/edit_event.html'
-	context = {'event_form' : event_form, 'event':event}
+	context = {'form_r' : form_r, 'event_form' : event_form, 'event':event}
 	return render(request, template_name, context)
 
 

@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from videos.models import Category
 from events.slug import unique_slugify
 from cloudinary.models import CloudinaryField
-from django.contrib.auth.decorators import login_required
+
 
 
 

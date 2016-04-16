@@ -36,7 +36,7 @@ FULL_DOMAIN_NAME = 'https://edventure2015.herokuapp.com/'
 # Application definition
 
 INSTALLED_APPS = (
-    'jet',
+    'flat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

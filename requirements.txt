@@ -23,4 +23,4 @@ django-easy-maps==0.9.2
 geopy==1.10.0
 six==1.9.0
 cloudinary
-django-jet
+django-flat-theme

@@ -9,7 +9,6 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include ('allauth.urls')),
     url(r'^$', 'videos.views.homepage', name='homepage'),

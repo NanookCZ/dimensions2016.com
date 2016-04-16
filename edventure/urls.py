@@ -9,6 +9,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include ('allauth.urls')),
     url(r'^$', 'videos.views.homepage', name='homepage'),
@@ -29,6 +30,6 @@ urlpatterns = [
     url(r'^add-event/$', 'events.views.add_event', name='add_event'),
     url(r'^edit-event/(?P<id>\d+)/$', 'events.views.edit_event', name='edit-event'),
     url(r'^users/$', 'accounts.views.all_users', name='users'),
-    
-    
+
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

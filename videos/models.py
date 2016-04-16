@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 import urllib
 from django.db import models
 from django.conf import settings
-from django.core.urlresolvers import reverse 
+from django.core.urlresolvers import reverse
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -129,17 +129,3 @@ class ContentType(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('content-type', kwargs={"slug" : self.slug})
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -36,6 +36,8 @@ FULL_DOMAIN_NAME = 'https://edventure2015.herokuapp.com/'
 # Application definition
 
 INSTALLED_APPS = (
+    'jet',
+    'django.contrib.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -97,10 +99,10 @@ SOCIALACCOUNT_PROVIDERS = \
 
 
 
-cloudinary.config( 
-  cloud_name = "hiurimyor", 
-  api_key = "964795216427314", 
-  api_secret = "AxCZXOv6A-sKwG8Y-EYx9th_6S0" 
+cloudinary.config(
+  cloud_name = "hiurimyor",
+  api_key = "964795216427314",
+  api_secret = "AxCZXOv6A-sKwG8Y-EYx9th_6S0"
 )
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
@@ -213,4 +215,3 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "media")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-

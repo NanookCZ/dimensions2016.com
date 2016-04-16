@@ -47,6 +47,7 @@ class ContentBase(models.Model):
 	approved_by_admin = models.BooleanField(default = True)
 	objects = ContentBaseManager()
 	month_course = models.CharField(max_length = 10, blank = True, null = True, default='no')
+	paid_course = models.CharField(max_length = 10, blank = True, null = True, default='no')
 
 	def __unicode__(self):
 		return "%s" %(self.title)
